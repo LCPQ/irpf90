@@ -389,6 +389,9 @@ def add_operators(text):
     re_incr = re.compile(r"(\s*)(.*)(\+=)(.*$)", re.S)
     re_decr = re.compile(r"(\s*)(.*)(-=)(.*$)", re.S)
     re_mult = re.compile(r"(\s*)(.*)(\*=)(.*$)", re.S)
+    re_incr_if = re.compile(r"(.*)(\))(\s*)(.*)(\+=)(.*$)", re.S)
+    re_decr_if = re.compile(r"(.*)(\))(\s*)(.*)(-=)(.*$)", re.S)
+    re_mult_if = re.compile(r"(.*)(\))(\s*)(.*)(\*=)(.*$)", re.S)
     '''Change additional operators'''
     result = []
     for line in text:
@@ -398,16 +401,20 @@ def add_operators(text):
            ls.startswith('print*') or \
            ls.startswith('write('):
             pass
-        elif "+=" in buffer:
-            if buffer.lstrip().startswith("if "):
-                re_incr = re.compile(r"(.*)(\))(\s*)(.*)(\+=)(.*$)", re.S)
-                line.text = re.sub(re_incr, r'\1\2\4=\4+(\6)', buffer)
-            else:
+        elif buffer.lstrip().startswith("if "):
+            if "+=" in buffer:
+                line.text = re.sub(re_incr_if, r'\1\2\4=\4+(\6)', buffer)
+            elif "-=" in buffer:
+                line.text = re.sub(re_incr_if, r'\1\2\4=\4-(\6)', buffer)
+            elif "*=" in buffer:
+                line.text = re.sub(re_incr_if, r'\1\2\4=\4*(\6)', buffer)
+        else:
+            if "+=" in buffer:
                 line.text = re.sub(re_incr, r'\1\2=\2+(\4)', buffer)
-        elif "-=" in buffer:
-            line.text = re.sub(re_decr, r'\1\2=\2-(\4)', buffer)
-        elif "*=" in buffer:
-            line.text = re.sub(re_mult, r'\1\2=\2*(\4)', buffer)
+            elif "-=" in buffer:
+                line.text = re.sub(re_decr, r'\1\2=\2-(\4)', buffer)
+            elif "*=" in buffer:
+                line.text = re.sub(re_mult, r'\1\2=\2*(\4)', buffer)
         result.append(line)
     return result
 
