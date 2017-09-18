@@ -547,7 +547,7 @@ class Variable(object):
       "!$ integer                  :: nthreads"]
       if command_line.do_openmp:
         result.append(" call irp_lock_%s(.True.)"%(same_as))
-      if command_line.do_assert or command_line.do_debug:
+      if command_line.do_debug:
         result.append("  call irp_enter(irp_here)")
       result += call_provides(self.to_provide)
       result += flatten( map(build_alloc,[self.same_as]+self.others) )
@@ -555,7 +555,7 @@ class Variable(object):
                   "  call bld_%s"%(same_as),
                   "  %s_is_built = .True."%(same_as), "" ]
       result += [ " endif" ]
-      if command_line.do_assert or command_line.do_debug:
+      if command_line.do_debug:
         result.append("  call irp_leave(irp_here)")
       if command_line.do_openmp:
         result.append(" call irp_lock_%s(.False.)"%(same_as))

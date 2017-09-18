@@ -360,7 +360,7 @@ def run():
 
     l_common_s = []
 
-    if command_line.do_assert:
+    if command_line.do_debug:
         l_common_o += [ "irp_stack.irp.o" ]
         l_common_s += [ "irp_stack.irp.F90" ]
 

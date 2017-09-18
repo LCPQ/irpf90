@@ -28,7 +28,6 @@
 import util 
 from command_line import command_line
 
-do_assert = command_line.do_assert
 do_debug = command_line.do_debug
 do_openmp = command_line.do_openmp
 do_memory = command_line.do_memory
@@ -159,7 +158,7 @@ end subroutine
 """
 
   # $1
-  if do_assert or do_debug:
+  if do_debug:
     s = """
  if (.not.alloc) then
  """
@@ -223,7 +222,7 @@ end subroutine
     txt = txt.replace("$3","")
 
   # $4
-  if do_debug or do_assert:
+  if do_debug:
     txt = txt.replace("$4","""
   stack_index(ithread) = max(0,stack_index(ithread)-1)""")
   else:
