@@ -321,7 +321,7 @@ def execute_templates(text):
         file.close()
         # Execute shell
         import os
-        pipe = os.popen("python < %s"%(scriptname),'r')
+        pipe = os.popen("python2 < %s"%(scriptname),'r')
         lines = pipe.readlines()
         pipe.close()
         result += get_text(lines,scriptname)

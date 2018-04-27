@@ -28,7 +28,7 @@
 
 function run ()
 {
-cat << EOF | exec python - $@
+cat << EOF | exec python2 - $@
 import sys, os
 
 from irpf90_libs.irpf90_t import mandir

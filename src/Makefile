@@ -1,4 +1,4 @@
-PYTHON=python
+PYTHON=python2
 PYVERSION=$(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 HAS_CYTHON=$(shell bash -c "which cython &> /dev/null && echo 1 || echo 0")
 ifneq ($(HAS_CYTHON),0)
