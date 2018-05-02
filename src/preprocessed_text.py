@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 #   IRPF90 is a Fortran90 preprocessor written in Python for programming using
 #   the Implicit Reference to Parameters (IRP) method.
 #   Copyright (C) 2009 Anthony SCEMAMA
@@ -321,7 +321,7 @@ def execute_templates(text):
         file.close()
         # Execute shell
         import os
-        pipe = os.popen("python < %s"%(scriptname),'r')
+        pipe = os.popen("python2 < %s"%(scriptname),'r')
         lines = pipe.readlines()
         pipe.close()
         result += get_text(lines,scriptname)

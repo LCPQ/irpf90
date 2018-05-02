@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import sys, os
 wd = os.path.abspath(os.path.dirname(__file__))
